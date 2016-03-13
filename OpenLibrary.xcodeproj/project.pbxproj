@@ -14,6 +14,7 @@
 		49DAA5881C94FE990070EF5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49DAA5861C94FE990070EF5F /* Main.storyboard */; };
 		49DAA58A1C94FE990070EF5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DAA5891C94FE990070EF5F /* Assets.xcassets */; };
 		49DAA58D1C94FE990070EF5F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49DAA58B1C94FE990070EF5F /* LaunchScreen.storyboard */; };
+		49DAA5961C9503090070EF5F /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DAA5951C9503090070EF5F /* Book.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		49DAA5891C94FE990070EF5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49DAA58C1C94FE990070EF5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49DAA58E1C94FE990070EF5F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49DAA5951C9503090070EF5F /* Book.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 		49DAA57C1C94FE980070EF5F /* OpenLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				49DAA5941C9502F80070EF5F /* Models */,
 				49DAA57D1C94FE980070EF5F /* AppDelegate.swift */,
 				49DAA5821C94FE990070EF5F /* MasterViewController.swift */,
 				49DAA5841C94FE990070EF5F /* DetailViewController.swift */,
@@ -68,6 +71,14 @@
 				49DAA57F1C94FE980070EF5F /* OpenLibrary.xcdatamodeld */,
 			);
 			path = OpenLibrary;
+			sourceTree = "<group>";
+		};
+		49DAA5941C9502F80070EF5F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				49DAA5951C9503090070EF5F /* Book.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,6 +113,7 @@
 				TargetAttributes = {
 					49DAA5791C94FE980070EF5F = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = L9B8JU68WF;
 					};
 				};
 			};
@@ -144,6 +156,7 @@
 				49DAA57E1C94FE980070EF5F /* AppDelegate.swift in Sources */,
 				49DAA5811C94FE990070EF5F /* OpenLibrary.xcdatamodeld in Sources */,
 				49DAA5831C94FE990070EF5F /* MasterViewController.swift in Sources */,
+				49DAA5961C9503090070EF5F /* Book.swift in Sources */,
 				49DAA5851C94FE990070EF5F /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -255,10 +268,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = OpenLibrary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.sergioacosta.OpenLibrary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -266,10 +282,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = OpenLibrary/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.sergioacosta.OpenLibrary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -292,6 +311,7 @@
 				49DAA5931C94FE990070EF5F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
