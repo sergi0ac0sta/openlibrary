@@ -47,26 +47,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     func insertNewObject(sender: AnyObject) {
         self.searchBar.hidden = false
-        /*
-        let context = self.fetchedResultsController.managedObjectContext
-        let entity = self.fetchedResultsController.fetchRequest.entity!
-        let newManagedObject = NSEntityDescription.insertNewObjectForEntityForName(entity.name!, inManagedObjectContext: context)
-             
-        // If appropriate, configure the new managed object.
-        // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-        newManagedObject.setValue(book.title, forKey: "text")
-             
-        // Save the context.
-        do {
-            try context.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            //print("Unresolved error \(error), \(error.userInfo)")
-            abort()
-        }
-        */
     }
+    
     // MARK: - Segues
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -266,15 +248,39 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                             }
                         } else {
                             dispatch_sync(dispatch_get_main_queue()) {
+                                let alerta = UIAlertController(title: "Resultados de búsqueda",
+                                    message: "Tu búsqueda no arrojó resultados, por favor intenta otra.",
+                                    preferredStyle: UIAlertControllerStyle.Alert)
+                                let accion2 = UIAlertAction(title: "OK",
+                                    style: UIAlertActionStyle.Cancel) { _ in
+                                }
+                                alerta.addAction(accion2)
+                                self.presentViewController(alerta, animated: true, completion: nil)
                             }
                         }
                     } catch _ {}
                 } else {
                     dispatch_sync(dispatch_get_main_queue()) {
+                        let alerta = UIAlertController(title: "Error de conexión",
+                            message: "Verifica tu conexión a internet.",
+                            preferredStyle: UIAlertControllerStyle.Alert)
+                        let accion2 = UIAlertAction(title: "OK",
+                            style: UIAlertActionStyle.Cancel) { _ in
+                        }
+                        alerta.addAction(accion2)
+                        self.presentViewController(alerta, animated: true, completion: nil)
                     }
                 }
             } else {
                 dispatch_sync(dispatch_get_main_queue()) {
+                    let alerta = UIAlertController(title: "Error de conexión",
+                        message: "Verifica tu conexión a internet.",
+                        preferredStyle: UIAlertControllerStyle.Alert)
+                    let accion2 = UIAlertAction(title: "OK",
+                        style: UIAlertActionStyle.Cancel) { _ in
+                    }
+                    alerta.addAction(accion2)
+                    self.presentViewController(alerta, animated: true, completion: nil)
                 }
             }
         }
