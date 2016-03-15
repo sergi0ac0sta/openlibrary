@@ -35,6 +35,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func viewWillAppear(animated: Bool) {
         self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
         super.viewWillAppear(animated)
+        self.searchBar.text = nil
+        self.searchBar.hidden = true
     }
 
     override func didReceiveMemoryWarning() {
