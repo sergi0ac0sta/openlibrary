@@ -248,39 +248,18 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                             }
                         } else {
                             dispatch_sync(dispatch_get_main_queue()) {
-                                let alerta = UIAlertController(title: "Resultados de búsqueda",
-                                    message: "Tu búsqueda no arrojó resultados, por favor intenta otra.",
-                                    preferredStyle: UIAlertControllerStyle.Alert)
-                                let accion2 = UIAlertAction(title: "OK",
-                                    style: UIAlertActionStyle.Cancel) { _ in
-                                }
-                                alerta.addAction(accion2)
-                                self.presentViewController(alerta, animated: true, completion: nil)
+                                self.sendAlert("Resultados de búsqueda", message: "Tu búsqueda no arrojó resultados, por favor intenta otra.")
                             }
                         }
                     } catch _ {}
                 } else {
                     dispatch_sync(dispatch_get_main_queue()) {
-                        let alerta = UIAlertController(title: "Error de conexión",
-                            message: "Verifica tu conexión a internet.",
-                            preferredStyle: UIAlertControllerStyle.Alert)
-                        let accion2 = UIAlertAction(title: "OK",
-                            style: UIAlertActionStyle.Cancel) { _ in
-                        }
-                        alerta.addAction(accion2)
-                        self.presentViewController(alerta, animated: true, completion: nil)
+                        self.sendAlert("Error de conexión", message: "Verifica tu conexión a internet.")
                     }
                 }
             } else {
                 dispatch_sync(dispatch_get_main_queue()) {
-                    let alerta = UIAlertController(title: "Error de conexión",
-                        message: "Verifica tu conexión a internet.",
-                        preferredStyle: UIAlertControllerStyle.Alert)
-                    let accion2 = UIAlertAction(title: "OK",
-                        style: UIAlertActionStyle.Cancel) { _ in
-                    }
-                    alerta.addAction(accion2)
-                    self.presentViewController(alerta, animated: true, completion: nil)
+                    self.sendAlert("Error de conexión", message: "Verifica tu conexión a internet.")
                 }
             }
         }
@@ -288,6 +267,17 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         dt.resume()
     }
 
+    func sendAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title,
+            message: message,
+            preferredStyle: UIAlertControllerStyle.Alert)
+        let action = UIAlertAction(title: "OK",
+            style: UIAlertActionStyle.Cancel) { _ in
+        }
+        alert.addAction(action)
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
     
     /*
      // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
