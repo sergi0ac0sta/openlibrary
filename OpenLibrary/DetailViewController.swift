@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class DetailViewController: UIViewController {
     var book = Book()
@@ -41,7 +42,6 @@ class DetailViewController: UIViewController {
         } else {
             self.lblNoImage.hidden = false
         }
-
     }
 
     override func didReceiveMemoryWarning() {

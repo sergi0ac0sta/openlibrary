@@ -30,6 +30,24 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             let controllers = split.viewControllers
             self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
+        
+        let entityBook = NSEntityDescription.entityForName("Book", inManagedObjectContext: self.managedObjectContext!)
+        let request = entityBook?.managedObjectModel.fetchRequestTemplateForName("requestBooks")
+        
+        do {
+            let books = try self.managedObjectContext?.executeFetchRequest(request!)
+            for book in books! {
+                let name = book.valueForKey("name") as! String
+                let authors = (book.valueForKey("authors") as! String).componentsSeparatedByString(",")
+                let cover = NSURL(string: book.valueForKey("cover") as! String)
+                self.books.append(Book(title: name, authors: authors, cover: cover))
+                
+                self.tableView.beginUpdates()
+                self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: self.books.count - 1, inSection: 0)], withRowAnimation: .Automatic)
+                self.tableView.endUpdates()
+                
+            }
+        } catch {}
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -87,6 +105,17 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
+            let entityBook = NSEntityDescription.entityForName("Book", inManagedObjectContext: self.managedObjectContext!)
+            let request = entityBook?.managedObjectModel.fetchRequestFromTemplateWithName("requestBook", substitutionVariables: ["name" : books[indexPath.row].title])
+            do {
+                let eBooks = try self.managedObjectContext?.executeFetchRequest(request!)
+                if eBooks?.count > 0 {
+                    for eBook: AnyObject in eBooks! {
+                        self.managedObjectContext?.deleteObject(eBook as! NSManagedObject)
+                    }
+                    try self.managedObjectContext?.save()
+                }
+            } catch {}
             
             self.tableView.beginUpdates()
             books.removeAtIndex(indexPath.row)
@@ -237,13 +266,32 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                             if !self.books.contains({$0.title == book.title}) {
                                 self.books.append(Book(title: bookData.title, authors: bookData.authors, cover: bookData.cover))
                                 
+                                let entityBook = NSEntityDescription.entityForName("Book", inManagedObjectContext: self.managedObjectContext!)
+                                let request = entityBook?.managedObjectModel.fetchRequestFromTemplateWithName("requestBook", substitutionVariables: ["name" : book.title])
+                                
+                                do {
+                                    let eBook = try self.managedObjectContext?.executeFetchRequest(request!)
+                                    if eBook?.count == 0 {
+                                        let newBook = NSEntityDescription.insertNewObjectForEntityForName("Book", inManagedObjectContext: self.managedObjectContext!)
+                                        newBook.setValue(book.title, forKey: "name")
+                                        newBook.setValue(book.authors.joinWithSeparator(", "), forKey: "authors")
+                                        
+                                        if book.cover != nil {
+                                            newBook.setValue(book.cover!.absoluteString, forKey: "cover")
+                                        } else {
+                                            newBook.setValue("", forKey: "cover")
+                                        }
+                                        do {
+                                            try self.managedObjectContext?.save()
+                                        } catch {}
+
+                                    }
+                                } catch {}
                                 dispatch_sync(dispatch_get_main_queue()) {
-                                    
                                     self.tableView.beginUpdates()
                                     self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: self.books.count - 1, inSection: 0)], withRowAnimation: .Automatic)
                                     self.tableView.endUpdates()
                                     self.performSegueWithIdentifier("showDetail", sender:self)
-
                                 }
                             }
                         } else {
