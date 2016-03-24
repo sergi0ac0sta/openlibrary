@@ -24,7 +24,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
 
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
+        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(MasterViewController.insertNewObject(_:)))
         self.navigationItem.rightBarButtonItem = addButton
         if let split = self.splitViewController {
             let controllers = split.viewControllers
@@ -37,10 +37,11 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         do {
             let books = try self.managedObjectContext?.executeFetchRequest(request!)
             for book in books! {
+                let isbn = book.valueForKey("isbn") as! String;
                 let name = book.valueForKey("name") as! String
                 let authors = (book.valueForKey("authors") as! String).componentsSeparatedByString(",")
                 let cover = NSURL(string: book.valueForKey("cover") as! String)
-                self.books.append(Book(title: name, authors: authors, cover: cover))
+                self.books.append(Book(isbn: isbn, title: name, authors: authors, cover: cover))
                 
                 self.tableView.beginUpdates()
                 self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: self.books.count - 1, inSection: 0)], withRowAnimation: .Automatic)
@@ -227,7 +228,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         searchBar.text = nil
     }
     
-    func parse(data: NSDictionary) -> (title: String, authors: [String]?, cover: NSURL?){
+    func parse(data: NSDictionary) -> (isbn: String, title: String, authors: [String]?, cover: NSURL?){
         var bookTitle = ""
         var bookAuthors: [String] = []
         var bookCover: NSURL? = nil
@@ -248,7 +249,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                 bookCover = NSURL(string: m as! String)
             }
         }
-        return (bookTitle, bookAuthors, bookCover)
+        return (self.searchBar.text!, bookTitle, bookAuthors, bookCover)
     }
     
     func search() {
@@ -261,10 +262,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                         let json = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableLeaves) as! NSDictionary
                         if json.count > 0 {
                             let bookData = self.parse(json)
-                            let book = Book(title: bookData.title, authors: bookData.authors, cover: bookData.cover)
+                            let book = Book(isbn: bookData.isbn, title: bookData.title, authors: bookData.authors, cover: bookData.cover)
                             
                             if !self.books.contains({$0.title == book.title}) {
-                                self.books.append(Book(title: bookData.title, authors: bookData.authors, cover: bookData.cover))
+                                self.books.append(Book(isbn: bookData.isbn, title: bookData.title, authors: bookData.authors, cover: bookData.cover))
                                 
                                 let entityBook = NSEntityDescription.entityForName("Book", inManagedObjectContext: self.managedObjectContext!)
                                 let request = entityBook?.managedObjectModel.fetchRequestFromTemplateWithName("requestBook", substitutionVariables: ["name" : book.title])
@@ -273,6 +274,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                                     let eBook = try self.managedObjectContext?.executeFetchRequest(request!)
                                     if eBook?.count == 0 {
                                         let newBook = NSEntityDescription.insertNewObjectForEntityForName("Book", inManagedObjectContext: self.managedObjectContext!)
+                                        newBook.setValue(book.isbn, forKey: "isbn")
                                         newBook.setValue(book.title, forKey: "name")
                                         newBook.setValue(book.authors.joinWithSeparator(", "), forKey: "authors")
                                         

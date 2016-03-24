@@ -9,38 +9,40 @@
 import Foundation
 
 class Book {
+    var isbn: String = ""
     var title: String = ""
     var authors: [String] = []
     var cover: NSURL? = nil
     
     init() {}
     
-    convenience init(title: String) {
+    convenience init(isbn: String, title: String) {
         self.init()
+        self.isbn = isbn
         self.title = title
     }
     
-    convenience init(title: String, authors: [String]?, cover: NSURL?){
-        self.init(title: title)
+    convenience init(isbn: String, title: String, authors: [String]?, cover: NSURL?){
+        self.init(isbn: isbn, title: title)
         if let a = authors{
             self.authors += a
         }
         self.cover = cover
     }
     
-    convenience init(title: String, authors: [String], cover: String){
-        self.init(title: title)
+    convenience init(isbn: String, title: String, authors: [String], cover: String){
+        self.init(isbn: isbn, title: title)
         self.authors += authors
         self.cover = NSURL(string: cover)
     }
     
-    convenience init(title: String, authors: [String]){
-        self.init(title: title)
+    convenience init(isbn: String, title: String, authors: [String]){
+        self.init(isbn: isbn, title: title)
         self.authors += authors
     }
     
-    convenience init(title: String, cover: String){
-        self.init(title: title)
+    convenience init(isbn: String, title: String, cover: String){
+        self.init(isbn: isbn, title: title)
         self.cover = NSURL(string: cover)
     }
     

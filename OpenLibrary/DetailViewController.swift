@@ -17,6 +17,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var lblAuthors: UILabel!
     @IBOutlet weak var lblNoImage: UILabel!
     @IBOutlet weak var imgCover: UIImageView!
+    @IBOutlet weak var lblIsbn: UILabel!
 
     var detailItem: AnyObject? {
         didSet {
@@ -30,6 +31,7 @@ class DetailViewController: UIViewController {
         
         lblTitle.text = book.title
         lblAuthors.text = book.authors.joinWithSeparator(", ")
+        lblIsbn.text = book.isbn
         
         if let cover = book.cover {
             if let data = NSData(contentsOfURL: cover) {

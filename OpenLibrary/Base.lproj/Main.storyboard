@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="H1p-Uh-vWS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="H1p-Uh-vWS">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -59,10 +60,6 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="y6P-uq-dcE">
                                 <rect key="frame" x="210" y="173" width="180" height="253"/>
                                 <color key="backgroundColor" red="0.85084134615384621" green="0.85084134615384621" blue="0.85084134615384621" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="253" id="ZYD-O7-wv8"/>
-                                    <constraint firstAttribute="width" constant="180" id="f9f-Lx-Elr"/>
-                                </constraints>
                             </imageView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sin portada" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbO-rE-a7T">
                                 <rect key="frame" x="256" y="289" width="89" height="21"/>
@@ -70,21 +67,43 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ISBN:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phO-Kq-dgw">
+                                <rect key="frame" x="210" y="434" width="43" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="43" id="GVf-tc-2uX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UpU-w8-hoc">
+                                <rect key="frame" x="256" y="434" width="134" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="0XM-y9-sOw" firstAttribute="trailing" secondItem="svH-Pt-448" secondAttribute="trailingMargin" id="5BS-zp-FTe"/>
-                            <constraint firstItem="0XM-y9-sOw" firstAttribute="top" secondItem="Gzm-cy-UwK" secondAttribute="bottom" constant="8" id="5fb-sS-3Xq"/>
-                            <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" id="8lv-UI-HuA"/>
-                            <constraint firstItem="Gzm-cy-UwK" firstAttribute="centerX" secondItem="svH-Pt-448" secondAttribute="centerX" id="BUl-Zq-fST"/>
-                            <constraint firstItem="Gzm-cy-UwK" firstAttribute="trailing" secondItem="svH-Pt-448" secondAttribute="trailingMargin" id="DHa-Ls-JAC"/>
-                            <constraint firstItem="y6P-uq-dcE" firstAttribute="top" secondItem="0XM-y9-sOw" secondAttribute="bottom" constant="38" id="Grr-8W-Q2Y"/>
-                            <constraint firstItem="rbO-rE-a7T" firstAttribute="centerX" secondItem="svH-Pt-448" secondAttribute="centerX" id="RbL-tc-ewp"/>
-                            <constraint firstItem="rbO-rE-a7T" firstAttribute="centerY" secondItem="y6P-uq-dcE" secondAttribute="centerY" id="Xyo-dH-dVu"/>
-                            <constraint firstItem="Gzm-cy-UwK" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" constant="16" id="ZuL-Hf-56N"/>
-                            <constraint firstItem="Gzm-cy-UwK" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" id="fkk-FX-PxR"/>
-                            <constraint firstItem="y6P-uq-dcE" firstAttribute="centerX" secondItem="svH-Pt-448" secondAttribute="centerX" id="q5X-Ms-Kay"/>
-                            <constraint firstItem="0XM-y9-sOw" firstAttribute="centerX" secondItem="svH-Pt-448" secondAttribute="centerX" id="sbE-vC-B6e"/>
+                            <constraint firstItem="phO-Kq-dgw" firstAttribute="firstBaseline" secondItem="UpU-w8-hoc" secondAttribute="firstBaseline" id="13s-bi-h6b"/>
+                            <constraint firstItem="Gzm-cy-UwK" firstAttribute="leading" secondItem="svH-Pt-448" secondAttribute="leadingMargin" id="2Yt-Cm-zNl"/>
+                            <constraint firstItem="y6P-uq-dcE" firstAttribute="centerX" secondItem="rbO-rE-a7T" secondAttribute="centerX" id="7Tf-Ko-9ZP"/>
+                            <constraint firstItem="y6P-uq-dcE" firstAttribute="centerY" secondItem="svH-Pt-448" secondAttribute="centerY" id="84a-2C-kFt"/>
+                            <constraint firstItem="rbO-rE-a7T" firstAttribute="leading" secondItem="UpU-w8-hoc" secondAttribute="leading" id="8v5-N3-GUg"/>
+                            <constraint firstItem="0XM-y9-sOw" firstAttribute="top" secondItem="Gzm-cy-UwK" secondAttribute="bottom" constant="8" symbolic="YES" id="9Pb-PA-RRe"/>
+                            <constraint firstItem="Gzm-cy-UwK" firstAttribute="top" secondItem="SYR-Wa-9uf" secondAttribute="bottom" constant="16" id="COD-V2-2fK"/>
+                            <constraint firstItem="phO-Kq-dgw" firstAttribute="baseline" secondItem="UpU-w8-hoc" secondAttribute="baseline" id="CPO-hJ-GkJ"/>
+                            <constraint firstItem="GAO-Cl-Wes" firstAttribute="top" secondItem="phO-Kq-dgw" secondAttribute="bottom" constant="145" id="DE8-VV-gfw"/>
+                            <constraint firstItem="UpU-w8-hoc" firstAttribute="leading" secondItem="phO-Kq-dgw" secondAttribute="trailing" constant="3" id="ERU-HT-H5s"/>
+                            <constraint firstItem="y6P-uq-dcE" firstAttribute="top" secondItem="0XM-y9-sOw" secondAttribute="bottom" constant="38" id="THd-2d-8cb"/>
+                            <constraint firstItem="y6P-uq-dcE" firstAttribute="centerY" secondItem="rbO-rE-a7T" secondAttribute="centerY" id="UNM-LH-xbe"/>
+                            <constraint firstItem="Gzm-cy-UwK" firstAttribute="trailing" secondItem="0XM-y9-sOw" secondAttribute="trailing" id="XTj-7K-BpN"/>
+                            <constraint firstItem="0XM-y9-sOw" firstAttribute="centerX" secondItem="rbO-rE-a7T" secondAttribute="centerX" id="bXX-rj-I8s"/>
+                            <constraint firstItem="y6P-uq-dcE" firstAttribute="leading" secondItem="phO-Kq-dgw" secondAttribute="leading" id="cqn-Gd-eqJ"/>
+                            <constraint firstItem="y6P-uq-dcE" firstAttribute="trailing" secondItem="UpU-w8-hoc" secondAttribute="trailing" id="fZ8-Zo-o7I"/>
+                            <constraint firstItem="phO-Kq-dgw" firstAttribute="top" secondItem="y6P-uq-dcE" secondAttribute="bottom" constant="8" symbolic="YES" id="hmX-Y5-IXU"/>
+                            <constraint firstItem="Gzm-cy-UwK" firstAttribute="trailing" secondItem="svH-Pt-448" secondAttribute="trailingMargin" id="r93-YJ-you"/>
+                            <constraint firstItem="Gzm-cy-UwK" firstAttribute="leading" secondItem="0XM-y9-sOw" secondAttribute="leading" id="yBY-uw-D3i"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -93,6 +112,7 @@
                         <outlet property="detailDescriptionLabel" destination="0XM-y9-sOw" id="deQ-Na-JPF"/>
                         <outlet property="imgCover" destination="y6P-uq-dcE" id="1SQ-Is-Z7a"/>
                         <outlet property="lblAuthors" destination="0XM-y9-sOw" id="hls-fY-h0X"/>
+                        <outlet property="lblIsbn" destination="UpU-w8-hoc" id="5cF-MD-lwY"/>
                         <outlet property="lblNoImage" destination="rbO-rE-a7T" id="fZt-sN-ydb"/>
                         <outlet property="lblTitle" destination="Gzm-cy-UwK" id="wyB-Th-aR4"/>
                     </connections>
